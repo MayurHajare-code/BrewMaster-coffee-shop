@@ -1,0 +1,110 @@
+
+.container {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #222;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+
+/* form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+} */
+
+
+/* label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+} */
+
+/* Inputs & Textarea *
+/* .input,
+input[type="number"],
+input[type="text"],
+textarea,
+select {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+} */
+
+/* textarea {
+  resize: none;
+  min-height: 80px;
+}
+
+
+.input:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+
+input[type="file"] {
+  padding: 0.3rem;
+  border: none;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+}
+
+
+label input[type="checkbox"] {
+  margin-right: 8px;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+
+.add-pg-submit-btn {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+
+.add-pg-submit-btn:hover {
+  background: linear-gradient(135deg, #0056b3, #003f8a);
+  transform: translateY(-1px);
+}
+
+
+.add-pg-back-link {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #004aad;
+  font-weight: 500;
+}
+
+.add-pg-back-link:hover {
+  text-decoration: underline;
+} */
