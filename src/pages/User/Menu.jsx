@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import "../../styles/MenuPage.css";
-import "../../styles/Card.css";
+import "../../styles/user/MenuPage.css";
+import "../../styles/user/Card.css";
 import { getCategories } from "../../services/categoryService";
 import { getMenuItems } from "../../services/menuService";
 import ProductCard from "../../components/User/ProductCard";

@@ -1,55 +1,9 @@
-import { useState } from "react";
-import "../../styles/Contact.css";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { auth, db } from "../../firebase";
-import toast from "react-hot-toast";
+import "../../styles/user/Contact.css";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState("");
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!auth.currentUser) {
-      toast.error("Please login to send a message.");
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      await addDoc(collection(db, "contacts"), {
-        ...formData,
-        userId: auth.currentUser.uid,
-        createdAt: serverTimestamp(),
-      });
-
-      toast.success("Message sent successfully.");
-      setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
-      console.error("Error sending message:", error);
-      toast.error(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <>
+    <div className="contact-page">
+      {/* Hero */}
       <section className="hero-section-allPages">
         <div className="hero-section-allPages-content">
           <h1>Get in Touch </h1>
@@ -60,6 +14,7 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* Main Section */}
       <section className="data-section">
         <div className="contact-container">
           <div className="contact-info">
@@ -71,46 +26,50 @@ const Contact = () => {
             </p>
 
             <ul>
-              <li><i class="fa-solid fa-location-dot"></i> Mumbai, India</li>
-              <li><i class="fa-solid fa-at"></i> mayurhajare333@gmail.com</li>
-              <li><i class="fa-solid fa-phone"></i> +91 8879334267</li>
+              <li>
+                <i class="fa-solid fa-location-dot"></i> Mumbai, India
+              </li>
+              <li>
+                <i class="fa-solid fa-at"></i> mayurhajare333@gmail.com
+              </li>
+              <li>
+                <i class="fa-solid fa-phone"></i> +91 8879334267
+              </li>
             </ul>
           </div>
-          <form onSubmit={handleSubmit}>
-            <h3>Send Us a Message</h3>
-            <label>Full Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
+          {/* <form onSubmit={handleSubmit}></form> */}
 
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-
-            <label>Massage</label>
-            <textarea
-              name="message"
-              rows="5"
-              value={formData.message}
-              onChange={handleChange}
-              required
-            />
-
-            <button type="submit">Send Message</button>
-          </form>
+          {/* Right */}
+          <div className="contact-map">
+            <h2>Visit Us</h2>
+            <iframe
+              title="BrewMaster Location"
+              src="https://www.google.com/maps?q=Mumbai&output=embed"
+              loading="lazy"
+            ></iframe>
+          </div>
         </div>
       </section>
-    </>
+
+      {/* Quick Actions */}
+      <section className="quick-actions">
+        <a href="tel:+918879334267">📞 Call Now</a>
+        <a href="https://wa.me/918879334267">💬 WhatsApp</a>
+        <a href="mailto:mayurhajare333@gmail.com">✉ Email Us</a>
+      </section>
+
+      {/* Why BrewMaster */}
+      <section className="why-us">
+        <h2>Why BrewMaster?</h2>
+        <p>
+          At BrewMaster Café, we believe coffee is more than just a drink. Every
+          cup is crafted using carefully sourced beans and brewed by passionate
+          baristas to give you a memorable experience.
+        </p>
+      </section>
+    </div>
   );
 };
 
 export default Contact;
+

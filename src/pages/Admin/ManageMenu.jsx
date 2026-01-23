@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getMenuItems, deleteMenuItem } from "../../services/menuService";
+import "../../styles/admin/ManageMenu.css";
 
 const ManageMenu = () => {
   const [menuList, setMenuList] = useState([]);
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const transactionsPerPage = 5;
 
   useEffect(() => {
     fetchMenus();
@@ -22,7 +27,8 @@ const ManageMenu = () => {
 
   // Delete menu item (Firestore)
   const deleteMenu = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this menu item?")) return;
+    if (!window.confirm("Are you sure you want to delete this menu item?"))
+      return;
 
     try {
       await deleteMenuItem(id);
@@ -34,147 +40,140 @@ const ManageMenu = () => {
 
   // Edit menu
   const handleEdit = (id) => {
-    navigate(`/admin/menu/edit/${id}`);
+    navigate(`/admin-menu/edit/${id}`);
   };
+
+  // Filter menu items based on search term
+  const filteredMenuList = menuList.filter(
+    (menu) =>
+      menu.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      menu.category.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
+  const indexOfLastTransaction = currentPage * transactionsPerPage;
+  const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
+  const currentMenuList = filteredMenuList.slice(
+    indexOfFirstTransaction,
+    indexOfLastTransaction,
+  );
+  const totalPages = Math.ceil(filteredMenuList.length / transactionsPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
-      {/* Internal CSS */}
-      <style>{`
-        .menu-management-container {
-          padding: 25px;
-          font-family: Arial, sans-serif;
-        }
+      <div className="container">
+        
+        <div style={{display:"flex", justifyContent: "space-between"}}>
+          <h2>Manage Menu Items</h2>
+          <div className="search-container" style={{ marginBottom: "15px" }}>
+            <input
+              type="text"
+              placeholder="Search by name or category..."
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1); // Reset to first page when searching
+              }}
+              style={{
+                padding: "8px 12px",
+                width: "300px",
+                borderRadius: "4px",
+                border: "1px solid #ccc",
+                fontSize: "14px",
+              }}
+            />
+          </div>
+        </div>
 
-        .menu-management-container h2 {
-          font-size: 26px;
-          margin-bottom: 20px;
-          color: #333;
-        }
+        {/* <ul className="menu-list"> */}
 
-        .menu-list {
-          list-style: none;
-          padding: 0;
-        }
+        <table className="transaction-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Available</th>
+              <th>Featured</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentMenuList.map((menu) => (
+              <tr key={menu.id} className="menu-item">
+                <td>{menu.title}</td>
+                <td>₹{menu.price}</td>
+                <td>{menu.category}</td>
+                <td>
+                  {/* {menu.feature && (
+                    <span className="badge featured">Featured</span>
+                  )} */}
 
-        .menu-item {
-          background: #ffffff;
-          border: 1px solid #ddd;
-          padding: 14px;
-          margin-bottom: 14px;
-          border-radius: 6px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-        }
-
-        .menu-info {
-          max-width: 70%;
-        }
-
-        .menu-info strong {
-          font-size: 16px;
-          color: #222;
-        }
-
-        .menu-meta {
-          font-size: 14px;
-          color: #555;
-        }
-
-        .badge {
-          padding: 2px 8px;
-          border-radius: 4px;
-          font-size: 12px;
-          margin-left: 6px;
-          color: #fff;
-        }
-
-        .available {
-          background-color: #4CAF50;
-        }
-
-        .not-available {
-          background-color: #f44336;
-        }
-
-        .featured {
-          background-color: #ff9800;
-        }
-
-        .menu-actions button {
-          margin-left: 8px;
-          padding: 6px 12px;
-          border: none;
-          border-radius: 4px;
-          font-size: 14px;
-          cursor: pointer;
-        }
-
-        .menu-actions button:first-child {
-          background-color: #2196F3;
-          color: #fff;
-        }
-
-        .menu-actions button:first-child:hover {
-          background-color: #1976D2;
-        }
-
-        .menu-actions button:last-child {
-          background-color: #f44336;
-          color: #fff;
-        }
-
-        .menu-actions button:last-child:hover {
-          background-color: #d32f2f;
-        }
-
-        .back-link {
-          display: inline-block;
-          margin-top: 15px;
-          color: #007bff;
-          text-decoration: none;
-          font-size: 14px;
-        }
-
-        .back-link:hover {
-          text-decoration: underline;
-        }
-      `}</style>
-
-      <div className="menu-management-container">
-        <h2>Manage Menu Items</h2>
-
-        <ul className="menu-list">
-          {menuList.map((menu) => (
-            <li key={menu.id} className="menu-item">
-              <div className="menu-info">
-                <strong>{menu.title}</strong>
-                <div className="menu-meta">
-                  ₹{menu.price} | Qty: {menu.quantity} | {menu.category}
+                  {menu.available ? (
+                    <span className="badge featured">Featured</span>
+                  ) : (
+                    <span className="badge featured">-</span>
+                  )}
+                </td>
+                <td>
                   {menu.available ? (
                     <span className="badge available">Available</span>
                   ) : (
                     <span className="badge not-available">Out</span>
                   )}
-                  {menu.feature && (
-                    <span className="badge featured">Featured</span>
-                  )}
+                </td>
+                <td>
+                  <button className="edit" onClick={() => handleEdit(menu.id)}>
+                    Edit
+                  </button>
+                  <button
+                    className="delete"
+                    onClick={() => deleteMenu(menu.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+
+                {/* <div className="menu-info">
+                  <strong>{menu.title}</strong>
+                  <div className="menu-meta">
+                    ₹{menu.price} | Qty: {menu.quantity} | {menu.category}
+                    {menu.available ? (
+                      <span className="badge available">Available</span>
+                    ) : (
+                      <span className="badge not-available">Out</span>
+                    )}
+                    {menu.feature && (
+                      <span className="badge featured">Featured</span>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              <div className="menu-actions">
-                <button onClick={() => handleEdit(menu.id)}>Edit</button>
-                <button onClick={() => deleteMenu(menu.id)}>Delete</button>
-              </div>
-            </li>
+                <div className="menu-actions">
+                  <button onClick={() => handleEdit(menu.id)}>Edit</button>
+                  <button onClick={() => deleteMenu(menu.id)}>Delete</button>
+                </div> */}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <div className="pagination">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              className={currentPage === index + 1 ? "active" : ""}
+              onClick={() => paginate(index + 1)}
+            >
+              {index + 1}
+            </button>
           ))}
-        </ul>
+        </div>
 
-        <Link to="/admin" className="back-link">
+        {/* <Link to="/admin" className="back-link">
           Back to Dashboard
-        </Link>
+        </Link> */}
       </div>
     </>
   );

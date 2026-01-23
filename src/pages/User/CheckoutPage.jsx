@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-import "../../styles/Checkout.css";
+import "../../styles/user/Checkout.css";
 import {
   collection,
   getDocs,
@@ -10,11 +10,14 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import toast from "react-hot-toast";
+import { useCart } from "../../Context/CartContext";
 
 const TAX_RATE = 0.05;
 
 const Checkout = () => {
-  const [cart, setCart] = useState([]);
+  // const [cart, setCart] = useState([]);
+  const { cart, setCart } = useCart();
+
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
@@ -22,29 +25,30 @@ const Checkout = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("cod");
 
   const navigate = useNavigate();
 
   // fetch cart
-  useEffect(() => {
-    const fetchCart = async () => {
-      const user = auth.currentUser;
-      if (!user) return;
+  // useEffect(() => {
+  //   const fetchCart = async () => {
+  //     const user = auth.currentUser;
+  //     if (!user) return;
 
-      const cartRef = collection(db, "users", user.uid, "cart");
-      const snapshot = await getDocs(cartRef);
+  //     const cartRef = collection(db, "users", user.uid, "cart");
+  //     const snapshot = await getDocs(cartRef);
 
-      const items = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+  //     const items = snapshot.docs.map((doc) => ({
+  //       id: doc.id,
+  //       ...doc.data(),
+  //     }));
 
-      setCart(items);
-      setLoading(false);
-    };
+  //     setCart(items);
+  //     setLoading(false);
+  //   };
 
-    fetchCart();
-  }, []);
+  //   fetchCart();
+  // }, []);
 
   const subtotal = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -54,8 +58,63 @@ const Checkout = () => {
   const tax = Number((subtotal * TAX_RATE).toFixed(2));
   const grandTotal = subtotal + tax;
 
+  // const placeOrder = async (e) => {
+  //   e.preventDefault();
+  //   if (!name || !phone || !address) {
+  //     alert("Please fill all customer details");
+  //     return;
+  //   }
+
+  //   if (phone.length < 10) {
+  //     alert("Enter valid phone number");
+  //     return;
+  //   }
+
+  //   const user = auth.currentUser;
+  //   if (!user) return;
+
+  //   try {
+  //     setSubmitting(true);
+
+  //     // save order
+  //     await addDoc(collection(db, "orders"), {
+  //       userId: user.uid,
+  //       items: cart,
+  //       pricing: {
+  //         subtotal,
+  //         tax,
+  //         total: grandTotal,
+  //       },
+  //       customer: { name, phone, address },
+  //       payment: {
+  //         method: paymentMethod,
+  //         status: paymentMethod === "cod" ? "pending" : "paid",
+  //       },
+  //       status: "pending",
+  //       createdAt: serverTimestamp(),
+  //     });
+
+  //     console.log("Submitting order...");
+  //     // clear cart
+  //     const cartRef = collection(db, "users", user.uid, "cart");
+  //     const snapshot = await getDocs(cartRef);
+  //     snapshot.docs.forEach((doc) => deleteDoc(doc.ref));
+
+  //     setCart([]);
+  //     toast.success(" Order placed successfully!");
+
+  //     navigate("/my-orders");
+  //   } catch (error) {
+  //     console.error("Order failed", error);
+  //     toast.error("Failed to place order. Try again.");
+  //   } finally {
+  //     setSubmitting(false);
+  //   }
+  // };
+
   const placeOrder = async (e) => {
     e.preventDefault();
+
     if (!name || !phone || !address) {
       alert("Please fill all customer details");
       return;
@@ -67,33 +126,37 @@ const Checkout = () => {
     }
 
     const user = auth.currentUser;
-    if (!user) return;
+    if (!user) {
+      alert("Please login to place order");
+      return;
+    }
 
     try {
       setSubmitting(true);
 
-      // save order
+      // ✅ Create ORDER (one time only)
       await addDoc(collection(db, "orders"), {
         userId: user.uid,
-        items: cart,
+        items: cart, // cart from state (which came from localStorage)
         pricing: {
           subtotal,
           tax,
           total: grandTotal,
         },
         customer: { name, phone, address },
+        payment: {
+          method: paymentMethod,
+          status: paymentMethod === "cod" ? "pending" : "paid",
+        },
         status: "pending",
         createdAt: serverTimestamp(),
       });
-      console.log("Submitting order...");
-      // clear cart
-      const cartRef = collection(db, "users", user.uid, "cart");
-      const snapshot = await getDocs(cartRef);
-      snapshot.docs.forEach((doc) => deleteDoc(doc.ref));
 
+      // ✅ Clear LOCAL cart (important)
+      localStorage.removeItem("cart");
       setCart([]);
-      toast.success(" Order placed successfully!");
 
+      toast.success("Order placed successfully!");
       navigate("/my-orders");
     } catch (error) {
       console.error("Order failed", error);
@@ -144,6 +207,19 @@ const Checkout = () => {
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
               />
+
+              <h3>Payment Method</h3>
+
+              <label className="payment-option">
+                <input
+                  type="radio"
+                  name="payment"
+                  value="cod"
+                  checked={paymentMethod === "cod"}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                Cash on Delivery
+              </label>
 
               <button type="submit" disabled={submitting}>
                 Place Order

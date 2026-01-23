@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { auth, db } from "../../firebase";
 import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
-import "../../styles/MyOrders.css";
+import "../../styles/user/MyOrders.css";
 import { onAuthStateChanged } from "firebase/auth";
 import { Link } from "react-router-dom";
 

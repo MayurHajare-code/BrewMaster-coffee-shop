@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../Context/CartContext";
 
-const ProductCard = ({ product, addToCart }) => {
+const ProductCard = ({ product }) => {
   const navigate = useNavigate();
-
+  const { addToCart } = useCart();
   const handleClick = () => {
     navigate(`/menu/${product.id}`);
   };

@@ -1,6 +1,6 @@
 import { getMenuItems } from "../../services/menuService";
 import { useEffect, useState } from "react";
-import "../../styles/Card.css";
+import "../../styles/user/Card.css";
 import Slider from "react-slick";
 import ProductCard from "./ProductCard";
 

@@ -1,4 +1,4 @@
-import "../../styles/HomePage.css";
+import "../../styles/user/HomePage.css";
 
 import MenuSlider from "../../components/User/MenuSlider";
 import { Link } from "react-router-dom";

@@ -28,7 +28,7 @@ const AdminRoute = () => {
     return () => unsubscribe();
   }, []);
 
-  if (loading) return <div>Loading...</div>; // wait until check is done
+  if (loading) return <div>Loading..., I think not login..</div>; // wait until check is done
 
   return isAdmin ? <Outlet /> : <Navigate to="/admin-login" />;
 };

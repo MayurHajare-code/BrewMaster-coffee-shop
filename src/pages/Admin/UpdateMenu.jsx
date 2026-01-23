@@ -89,28 +89,32 @@ const UpdateMenu = () => {
   }
 
   return (
-    <div className="container">
+    <div className="add-transaction-container">
       <h2>Update Menu Item</h2>
 
-      <form onSubmit={handleSubmit}>
-        <label>Title</label>
-        <input
-          name="title"
-          className="input"
-          value={menu.title}
-          onChange={handleChange}
-          required
-        />
+      <form onSubmit={handleSubmit} className="add-transaction-form">
+        <label>
+          Title
+          <input
+            name="title"
+            className="input"
+            value={menu.title}
+            onChange={handleChange}
+            required
+          />
+        </label>
 
-        <label>Price</label>
-        <input
-          type="number"
-          name="price"
-          className="input"
-          value={menu.price}
-          onChange={handleChange}
-          required
-        />
+        <label>
+          Price
+          <input
+            type="number"
+            name="price"
+            className="input"
+            value={menu.price}
+            onChange={handleChange}
+            required
+          />
+        </label>
 
         <img
           src={menu.image}
@@ -126,64 +130,74 @@ const UpdateMenu = () => {
           }}
         />
 
-        <label>Upload New Image</label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setNewImage(e.target.files[0])}
-        />
-
-        <label>Quantity</label>
-        <input
-          type="number"
-          name="quantity"
-          className="input"
-          value={menu.quantity}
-          onChange={handleChange}
-          min="1"
-        />
-
-        <label>Description</label>
-        <textarea
-          name="description"
-          className="input"
-          value={menu.description}
-          onChange={handleChange}
-          required
-        />
-
-        <label>Category</label>
-        <select
-          name="category"
-          value={menu.category}
-          onChange={handleChange}
-          className="input"
-          required
-        >
-          <option value="">Select Category</option>
-          {categories.map((cat) => (
-            <option key={cat.id} value={cat.name}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
+        <label>
+          Upload New Image
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setNewImage(e.target.files[0])}
+          />
+        </label>
 
         <label>
+          Quantity
+          <input
+            type="number"
+            name="quantity"
+            className="input"
+            value={menu.quantity}
+            onChange={handleChange}
+            min="1"
+          />
+        </label>
+
+        <label>
+          Description
+          <textarea
+            name="description"
+            className="input"
+            value={menu.description}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <label>
+          Category
+          <select
+            name="category"
+            value={menu.category}
+            onChange={handleChange}
+            className="input"
+            required
+          >
+            <option value="">Select Category</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.name}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="checkbox-label">
           <input
             type="checkbox"
             name="available"
             checked={menu.available}
             onChange={handleChange}
+             className="checkbox"
           />
           Available
         </label>
 
-        <label>
+        <label className="checkbox-label">
           <input
             type="checkbox"
             name="feature"
             checked={menu.feature}
             onChange={handleChange}
+             className="checkbox"
           />
           Featured
         </label>
@@ -193,7 +207,7 @@ const UpdateMenu = () => {
         </button>
 
         <Link to="/admin/manage-menu" className="add-pg-back-link">
-          Back
+          Back To Manage Menu's
         </Link>
       </form>
     </div>

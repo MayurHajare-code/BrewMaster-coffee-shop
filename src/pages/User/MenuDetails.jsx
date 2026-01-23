@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-import "../../styles/MenuDetails.css";
+import "../../styles/user/MenuDetails.css";
 import { useCart } from "../../Context/CartContext";
 
 const MenuDetails = () => {

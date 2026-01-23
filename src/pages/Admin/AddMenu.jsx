@@ -63,41 +63,135 @@ const AddMenu = () => {
   };
 
   return (
-    <div className="container">
+    // <div className="container">
+    //   <h2>Add Menu Item</h2>
+    //   <form onSubmit={handleSubmit}>
+    //     <label>Title</label>
+    //     <input type="text" name="title" value={menuData.title} onChange={handleChange} required />
+
+    //     <label>Price</label>
+    //     <input type="number" name="price" value={menuData.price} onChange={handleChange} required />
+
+    //     <label>Image</label>
+    //     <input type="file" onChange={handleImageChange} required />
+
+    //     <label>Quantity</label>
+    //     <input type="number" name="quantity" value={menuData.quantity} onChange={handleChange} min="1" />
+
+    //     <label>Description</label>
+    //     <textarea name="description" value={menuData.description} onChange={handleChange} required />
+
+    //     <label>Category</label>
+    //     <select name="category" value={menuData.category} onChange={handleChange} required>
+    //       <option value="">Select Category</option>
+    //       {categories.map((cat) => (
+    //         <option key={cat.id} value={cat.name}>
+    //           {cat.name}
+    //         </option>
+    //       ))}
+    //     </select>
+
+    //     <label>
+    //       <input type="checkbox" name="available" checked={menuData.available} onChange={handleChange} />
+    //       Available
+    //     </label>
+
+    //     <label>
+    //       <input type="checkbox" name="feature" checked={menuData.feature} onChange={handleChange} />
+    //       Featured Item
+    //     </label>
+
+    //     <button type="submit">Add Menu</button>
+    //     <Link to="/admin">Back to Dashboard</Link>
+    //   </form>
+    // </div>
+
+    <div className="add-transaction-container">
       <h2>Add Menu Item</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Title</label>
-        <input type="text" name="title" value={menuData.title} onChange={handleChange} required />
-
-        <label>Price</label>
-        <input type="number" name="price" value={menuData.price} onChange={handleChange} required />
-
-        <label>Image</label>
-        <input type="file" onChange={handleImageChange} required />
-
-        <label>Quantity</label>
-        <input type="number" name="quantity" value={menuData.quantity} onChange={handleChange} min="1" />
-
-        <label>Description</label>
-        <textarea name="description" value={menuData.description} onChange={handleChange} required />
-
-        <label>Category</label>
-        <select name="category" value={menuData.category} onChange={handleChange} required>
-          <option value="">Select Category</option>
-          {categories.map((cat) => (
-            <option key={cat.id} value={cat.name}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
-
+      <form onSubmit={handleSubmit} className="add-transaction-form">
         <label>
-          <input type="checkbox" name="available" checked={menuData.available} onChange={handleChange} />
-          Available
+          Title
+          <input
+            type="text"
+            name="title"
+            value={menuData.title}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>
+          Price
+          <input
+            type="number"
+            name="price"
+            value={menuData.price}
+            onChange={handleChange}
+            required
+          />
         </label>
 
         <label>
-          <input type="checkbox" name="feature" checked={menuData.feature} onChange={handleChange} />
+          Image
+          <input type="file" onChange={handleImageChange} required />
+        </label>
+
+        <label>
+          Quantity
+          <input
+            type="number"
+            name="quantity"
+            value={menuData.quantity}
+            onChange={handleChange}
+            min="1"
+          />
+        </label>
+
+        <label>
+          Description
+          <textarea
+            name="description"
+            value={menuData.description}
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <label>
+          Category
+          <select
+            name="category"
+            value={menuData.category}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Category</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.name}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="checkbox-label">
+          <input
+            type="checkbox"
+            name="available"
+            checked={menuData.available}
+            onChange={handleChange}
+            className="checkbox"
+          />
+          Available
+        </label>
+
+        <label className="checkbox-label">
+          <input
+            type="checkbox"
+            name="feature"
+            checked={menuData.feature}
+            onChange={handleChange}
+            className="checkbox"
+          />
           Featured Item
         </label>
 
@@ -109,13 +203,6 @@ const AddMenu = () => {
 };
 
 export default AddMenu;
-
-
-
-
-
-
-
 
 // import { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";

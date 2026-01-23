@@ -10,11 +10,11 @@ import {
   deleteCategory,
 } from "../../services/categoryService";
 
-const ManageCategory = () => {
+const AddCategory = () => {
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState("");
   const [editCategory, setEditCategory] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
+
   const [currentPage, setCurrentPage] = useState(1);
   const transactionsPerPage = 5;
 
@@ -59,58 +59,30 @@ const ManageCategory = () => {
     fetchCategories();
   };
 
-  // Filter menu items based on search term
-  const filteredcategoriesList = categories.filter(
-    (menu) =>
-      menu.name.toLowerCase().includes(searchTerm.toLowerCase()) 
-      // menu.category.toLowerCase().includes(searchTerm.toLowerCase()
-      
-  );
-
   const indexOfLastTransaction = currentPage * transactionsPerPage;
   const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
-  const currentCategories = filteredcategoriesList.slice(
+  const currentMenuList = categories.slice(
     indexOfFirstTransaction,
     indexOfLastTransaction,
   );
-  const totalPages = Math.ceil(
-    filteredcategoriesList.length / transactionsPerPage,
-  );
-
-  // const indexOfLastTransaction = currentPage * transactionsPerPage;
-  // const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
-  // const currentCategories = categories.slice(
-  //   indexOfFirstTransaction,
-  //   indexOfLastTransaction,
-  // );
-  // const totalPages = Math.ceil(categories.length / transactionsPerPage);
+  const totalPages = Math.ceil(categories.length / transactionsPerPage);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="add-transaction-container" >
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <h2>Manage Categories</h2>
-        <div className="search-container" style={{ marginBottom: "15px" }}>
-          <input
-            type="text"
-            placeholder="Search by name ..."
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              setCurrentPage(1); // Reset to first page when searching
-            }}
-            style={{
-              padding: "8px 12px",
-              width: "300px",
-              borderRadius: "4px",
-              border: "1px solid #ccc",
-              fontSize: "14px",
-            }}
-          />
-        </div>
-      </div>
+    <div className="add-transaction-container">
+      <h2>Add Categories</h2>
 
-      <table className="transaction-table">
+      <form onSubmit={handleAdd} className="add-transaction-form">
+        <input
+          value={newCategory}
+          onChange={(e) => setNewCategory(e.target.value)}
+          placeholder="New category"
+          className="input"
+        />
+        <button>Add Category</button>
+      </form>
+
+      {/* <table className="transaction-table">
         <thead>
           <tr>
             <th>Category Name</th>
@@ -145,18 +117,15 @@ const ManageCategory = () => {
               )}
             </tr>
           ))}
-        </tbody> */}
+        </tbody> 
 
         <tbody>
-          {currentCategories.map((cat) => (
+          {categories.map((cat) => (
             <tr key={cat.id}>
               {editCategory?.id === cat.id ? (
                 <>
                   <td>
-                    <form
-                      onSubmit={handleUpdate}
-                      className="add-transaction-form"
-                    >
+                    <form onSubmit={handleUpdate} className="add-transaction-form">
                       <input
                         value={editCategory.name}
                         onChange={(e) =>
@@ -196,19 +165,7 @@ const ManageCategory = () => {
             </tr>
           ))}
         </tbody>
-      </table>
-
-      <div className="pagination">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            className={currentPage === index + 1 ? "active" : ""}
-            onClick={() => paginate(index + 1)}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
+      </table> */}
 
       {/* <ul style={{ listStyle: "none", padding: 0 }}>
         {categories.map((cat) => (
@@ -240,4 +197,4 @@ const ManageCategory = () => {
   );
 };
 
-export default ManageCategory;
+export default AddCategory;

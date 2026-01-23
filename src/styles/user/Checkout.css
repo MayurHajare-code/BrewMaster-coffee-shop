@@ -25,6 +25,29 @@
   font-weight: bold;
 }
 
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.payment-option input[type="radio"] {
+  accent-color: #6f4e37; /* coffee brown */
+  cursor: pointer;
+}
+
+.payment-option:hover {
+  opacity: 0.9;
+}
+
+.checkout-form h3 {
+  margin-top: 20px;
+}
+
+
 /* Mobile and Tablet Styles */
 @media (max-width: 768px) {
   .checkout-container {

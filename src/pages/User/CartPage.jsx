@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import "../../styles/CartPage.css";
+import "../../styles/user/CartPage.css";
 
 import { useCart } from "../../Context/CartContext";
+import { useEffect } from "react";
 
 const Cart = ({}) => {
   const { cart, increaseQty, decreaseQty, removeFromCart } = useCart();
@@ -9,6 +10,10 @@ const Cart = ({}) => {
     (total, item) => total + item.price * item.quantity,
     0,
   );
+  // useEffect(() => {
+  //   const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+  //   setCart(savedCart);
+  // }, []);
 
   const TAX_RATE = 0.05;
   const tax = Number((totalAmount * TAX_RATE).toFixed(2));

@@ -11,7 +11,7 @@ import HomePage from "./pages/User/HomePage";
 
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminLayout from "./layouts/AdminLayout";
 import AddMenu from "./pages/Admin/AddMenu";
@@ -30,6 +30,9 @@ import AboutCoffee from "./pages/User/AboutCoffee";
 import Contact from "./pages/User/Contact";
 import MenuDetails from "./pages/User/MenuDetails";
 import UserRoute from "./components/User/UserRoute";
+import AddCategory from "./pages/Admin/AddCategory";
+import ManageOrder from "./pages/Admin/ManageOrder";
+import UpdateOrder from "./pages/Admin/UpdateOredr";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -37,27 +40,46 @@ function App() {
   const addToCart = (product) => {
     console.log("need to login.....");
 
-    setCart((prev) => {
-      const existingItem = prev.find((item) => item.id === product.id);
+    // setCart((prev) => {
+    //   const existingItem = prev.find((item) => item.id === product.id);
 
-      if (existingItem) {
-        const updatedQty = existingItem.quantity + 1;
+    //   if (existingItem) {
+    //     const updatedQty = existingItem.quantity + 1;
 
-        updateQuantity(product.id, updatedQty);
+    //     updateQuantity(product.id, updatedQty);
 
-        return prev.map((item) =>
-          item.id === product.id ? { ...item, quantity: updatedQty } : item,
-        );
-      }
+    //     return prev.map((item) =>
+    //       item.id === product.id ? { ...item, quantity: updatedQty } : item,
+    //     );
+    //   }
 
-      const newItem = {
-        ...product,
-        quantity: 1,
-      };
-      saveCartItem(newItem);
+    //   const newItem = {
+    //     ...product,
+    //     quantity: 1,
+    //   };
+    //   saveCartItem(newItem);
 
-      return [...prev, newItem];
-    });
+    //   return [...prev, newItem];
+    // });
+
+    // const addToCart = (product) => {
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existingItem = cart.find((item) => item.id === product.id);
+
+    if (existingItem) {
+      existingItem.quantity += 1;
+      toast.info("Quantity updated in cart");
+    } else {
+      cart.push({ ...product, quantity: 1 });
+      toast.success("Added to cart");
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    console.log("need not to login.....");
+    setCart(cart);
+    // };
   };
 
   useEffect(() => {
@@ -114,10 +136,13 @@ function App() {
         <Route element={<AdminRoute />}>
           <Route element={<AdminLayout />}>
             <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/add-menu" element={<AddMenu />} />
-            <Route path="/admin/manage-menu" element={<ManageMenu />} />
-            <Route path="/admin/menu/edit/:id" element={<UpdateMenu />} />
-            <Route path="/admin/category" element={<ManageCategory />} />
+            <Route path="/admin-add-menu" element={<AddMenu />} />
+            <Route path="/admin-manage-menu" element={<ManageMenu />} />
+            <Route path="/admin-menu/edit/:id" element={<UpdateMenu />} />
+            <Route path="/admin-add-category" element={<AddCategory />} />
+            <Route path="/admin-category" element={<ManageCategory />} />
+            <Route path="/admin-order" element={<ManageOrder />} />
+            <Route path="/admin-order/view/:id" element={<UpdateOrder />} />
           </Route>
         </Route>
 
