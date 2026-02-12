@@ -1,0 +1,195 @@
+.add-transaction-container {
+  max-width: 800px;
+  margin: 1.5rem auto 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.add-transaction-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.add-transaction-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  background: none !important;
+  padding: 1rem;
+  border-radius: 0px;
+  box-shadow: none;
+}
+
+.add-transaction-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 0.3rem 0;
+}
+
+.add-transaction-form .checkbox-label {
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.add-transaction-form .checkbox {
+  margin-right: 0.2rem;
+}
+
+.add-transaction-form input,
+.add-transaction-form select {
+  padding: 0.4rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-top: 0.2rem;
+}
+
+.add-transaction-form button {
+  padding: 0.5rem;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.add-transaction-form button:hover {
+  background: #2980b9;
+}
+
+.success {
+  background-color: #2ecc71;
+  color: white;
+  padding: 0.6rem;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  animation: fadeInOut 3s forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/****************  update order details ****/
+
+/* Order status container */
+.order-status-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Label */
+.order-status-control label {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Dropdown */
+.order-status-control select {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.order-status-control select:focus {
+  border-color: #007bff;
+}
+
+/* Update button */
+.order-status-control button {
+  padding: 6px 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.order-status-control button:hover {
+  background-color: #0056b3;
+}
+
+/* Status badge (existing order status) */
+.status {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Status colors */
+.status.PENDING {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status.CONFIRMED {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.status.PREPARING {
+  background-color: #ffeeba;
+  color: #856404;
+}
+
+.status.OUT_FOR_DELIVERY {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.status.DELIVERED {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status.CANCELLED {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.order-details-header form {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 0rem;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+}
