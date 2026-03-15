@@ -12,6 +12,8 @@ const Navbar = () => {
   const { user, isUser, loading, setUser, setRole } = useAuth();
   const navigate = useNavigate();
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
 
@@ -36,65 +38,79 @@ const Navbar = () => {
     }
   };
 
-  /* ⛔ Prevent flicker while /me is loading */
   if (loading) return null;
 
   return (
-    <header className={`header ${scrolled ? "header-scrolled" : ""}`}>
-      <nav>
-        <h1>
-          <Link to="/" className="header-logo">
-            <i className="fa-solid fa-mug-saucer"></i> BrewMaster
-          </Link>
-        </h1>
-
-        <ul>
-          {["/", "/menu", "/about", "/contact"].map((path, i) => (
-            <li key={i}>
-              <Link to={path} className="header-link">
-                {path === "/" ? "Home" : path.slice(1)}
-              </Link>
-            </li>
-          ))}
-
-          {/* USER MENU */}
-          {user && isUser ? (
-            <li className="account-menu">
-              <button
-                className="account-btn"
-                onClick={() => setOpenDropdown(!openDropdown)}
-              >
-                <i className="fas fa-user-alt"></i>
-                <span>{user.firstName || "Account"}</span>
-                <i className="fa-solid fa-caret-down"></i>
-              </button>
-
-              {openDropdown && (
-                <div className="account-dropdown">
-                  <Link to="/updateUser">Profile</Link>
-                  <Link to="/my-orders">My Orders</Link>
-                  <button onClick={handleLogout}>Sign Out</button>
-                </div>
-              )}
-            </li>
-          ) : (
-            <li>
-              <Link to="/login" className="header-link">
-                <i className="fa-solid fa-right-to-bracket"></i>
-              </Link>
-            </li>
-          )}
-
-          {/* CART */}
-          <li>
-            <Link to="/cart" className="header-link cart-link">
-              <i className="fa-solid fa-cart-shopping"></i>
-              {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+    <>
+      <header className={`header ${scrolled ? "header-scrolled" : ""}`}>
+        <nav>
+          <h1>
+            <Link to="/" className="header-logo">
+              <i className="fa-solid fa-mug-saucer"></i> BrewMaster
             </Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
+          </h1>
+
+          <ul className={menuOpen ? "nav-links open" : "nav-links"}>
+            <button className="close-menu" onClick={() => setMenuOpen(false)}>
+              <i className="fa-solid fa-xmark"></i>
+            </button>
+
+            {["/", "/menu", "/about", "/contact"].map((path, i) => (
+              <li key={i}>
+                <Link to={path} className="header-link">
+                  {path === "/" ? "Home" : path.slice(1)}
+                </Link>
+              </li>
+            ))}
+
+            {/* USER MENU */}
+            {user && isUser ? (
+              <li className="account-menu">
+                <button
+                  className="account-btn"
+                  onClick={() => setOpenDropdown(!openDropdown)}
+                >
+                  <i className="fas fa-user-alt"></i>
+                  <span>{user.firstName || "Account"}</span>
+                  <i className="fa-solid fa-caret-down"></i>
+                </button>
+
+                {openDropdown && (
+                  <div className="account-dropdown">
+                    <Link to="/updateUser">Profile</Link>
+                    <Link to="/my-orders">My Orders</Link>
+                    <button onClick={handleLogout}>Sign Out</button>
+                  </div>
+                )}
+              </li>
+            ) : (
+              <li>
+                <Link to="/login" className="header-link">
+                  <i className="fa-solid fa-right-to-bracket"></i>
+                </Link>
+              </li>
+            )}
+
+            {/* CART */}
+            <li>
+              <Link to="/cart" className="header-link cart-link">
+                <i className="fa-solid fa-cart-shopping"></i>
+                {cartCount > 0 && (
+                  <span className="cart-count">{cartCount}</span>
+                )}
+              </Link>
+            </li>
+          </ul>
+
+          <button className="menu-toggle" onClick={() => setMenuOpen(true)}>
+            <i className="fa-solid fa-bars"></i>
+          </button>
+        </nav>
+      </header>
+      {menuOpen && (
+        <div className="menu-overlay" onClick={() => setMenuOpen(false)}></div>
+      )}
+    </>
   );
 };
 

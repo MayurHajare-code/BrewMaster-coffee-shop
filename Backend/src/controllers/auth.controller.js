@@ -65,7 +65,7 @@ export const login = async (req, res, next) => {
                 email: user.email,
                 role: user.role,
             },
-            process.env.JWT_SECRET,
+            process.env.JWT_SECRET, 
             { expiresIn: "3d" }
         );
 
