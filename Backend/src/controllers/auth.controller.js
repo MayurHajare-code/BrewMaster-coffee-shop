@@ -65,14 +65,18 @@ export const login = async (req, res, next) => {
                 email: user.email,
                 role: user.role,
             },
-            process.env.JWT_SECRET, 
+            process.env.JWT_SECRET,
             { expiresIn: "3d" }
         );
 
         res.cookie("authToken", token, {
+            // httpOnly: true,
+            // secure: process.env.NODE_ENV === "production",
+            // sameSite: "strict",
+
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
+            secure: true,
+            sameSite: "None",
             maxAge: 3 * 24 * 60 * 60 * 1000,
         });
 
