@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import "../../styles/user/MyOrders.css";
 import api from "../../axios";
 
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+// import jsPDF from "jspdf";
+// import html2canvas from "html2canvas";
 import Invoice from "./Invoice";
 
 const OrderDetails = () => {
@@ -55,6 +55,10 @@ const OrderDetails = () => {
       alert("Invoice not ready yet");
       return;
     }
+
+    // lazy load heavy libraries
+    const { default: html2canvas } = await import("html2canvas");
+    const { default: jsPDF } = await import("jspdf");
 
     const canvas = await html2canvas(invoiceRef.current, { scale: 2 });
     const imgData = canvas.toDataURL("image/png");

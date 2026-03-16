@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import "../../styles/user/MenuPage.css";
 import "../../styles/user/Card.css";
-import { getCategories } from "../../services/categoryService";
-import { getMenuItems } from "../../services/menuService";
+// import { getCategories } from "../../services/categoryService";
+// import { getMenuItems } from "../../services/menuService";
 import MenuCard from "../../components/User/MenuCard";
 import { useSearchParams } from "react-router-dom";
 import api from "../../axios";

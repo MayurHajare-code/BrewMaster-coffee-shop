@@ -202,6 +202,7 @@
   padding: 80px 10%;
   text-align: center;
   overflow: visible;
+  max-width: 1200px;
 }
 
 .features-section h1 {
@@ -285,101 +286,95 @@
   color: #6f4e37;
 }
 
-
-
-
 /* Tablet Responsive (≤1024px) */
 
-
 @media (max-width: 1024px) {
+  .about-section {
+    padding: 60px 6%;
+  }
 
-.about-section{
-  padding: 60px 6%;
-}
+  .about-container {
+    gap: 30px;
+  }
 
-.about-container{
-  gap: 30px;
-}
+  .about-image img {
+    height: 300px;
+  }
 
-.about-image img{
-  height: 300px;
-}
+  .about-content {
+    padding-right: 20px;
+  }
 
-.about-content{
-  padding-right: 20px;
-}
-
-.about-section h1{
-  font-size: 28px;
-}
-
+  .about-section h1 {
+    font-size: 28px;
+  }
 }
 
 /* Mobile Responsive (≤768px) */
 
 @media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
 
-.about-container{
-  flex-direction: column;
-  text-align: center;
+  .about-image {
+    width: 100%;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+  }
+
+  .about-content {
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .about-text {
+    text-align: center;
+    margin: auto;
+  }
+
+  .about-stats {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 
-.about-image{
-  width: 100%;
-}
-
-.about-image img{
-  width: 100%;
-  height: auto;
-  max-width: 400px;
-}
-
-.about-content{
-  width: 100%;
-  padding-right: 0;
-}
-
-.about-text{
-  text-align: center;
-  margin: auto;
-}
-
-.about-stats{
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-}
-
- /* Small Mobile (≤480px) */
+/* Small Mobile (≤480px) */
 
 @media (max-width: 480px) {
+  .about-section {
+    padding: 50px 20px;
+  }
 
-.about-section{
-  padding: 50px 20px;
-}
+  .about-section h1 {
+    font-size: 24px;
+  }
 
-.about-section h1{
-  font-size: 24px;
-}
+  .about-subtitle {
+    font-size: 14px;
+  }
 
-.about-subtitle{
-  font-size: 14px;
-}
+  .about-text {
+    font-size: 14px;
+  }
 
-.about-text{
-  font-size: 14px;
-}
+  .about-image img {
+    max-width: 320px;
+  }
 
-.about-image img{
-  max-width: 320px;
-}
-
-.about-stats{
-  font-size: 14px;
-  gap: 10px;
-}
-
+  .about-stats {
+    font-size: 14px;
+    gap: 10px;
+  }
 }
 
 /****************************************************************/
+
+.slider {
+  min-width: 80%;
+}

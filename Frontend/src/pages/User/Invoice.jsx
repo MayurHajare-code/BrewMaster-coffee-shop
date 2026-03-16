@@ -45,7 +45,7 @@ const Invoice = ({ order }) => {
 
         <tbody>
           {order.items.map((item) => (
-            <tr key={item.id}>
+            <tr key={item._id}>
               <td>{item.name}</td>
               <td className="center">{item.quantity}</td>
               <td className="right">₹ {item.price}</td>

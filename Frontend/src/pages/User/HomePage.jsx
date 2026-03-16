@@ -89,7 +89,13 @@ const HomePage = ({ addToCart }) => {
           every day.
         </p>
 
-        {loading ? <p>Please wait...</p> : <MenuSlider addToCart={addToCart} />}
+        {/* <div className="slider">
+          {loading ? (
+            <p>Please wait...</p>
+          ) : (
+            <MenuSlider addToCart={addToCart} />
+          )}
+        </div> */}
       </section>
     </>
   );

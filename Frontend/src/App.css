@@ -1,3 +1,15 @@
+.page-loader {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+
+
+
+
+
 /* sub header section of all pages */
 .hero-section-allPages {
   height: 60vh;

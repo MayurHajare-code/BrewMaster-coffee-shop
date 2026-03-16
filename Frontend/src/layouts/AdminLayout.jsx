@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import "../styles/admin/AdminLayout.css";
-import { auth, db } from "../firebase";
-import { doc, getDoc } from "firebase/firestore";
+
 import AdminHeader from "../components/Admin/AdminHeader";
 import AdminSidebar from "../components/Admin/AdminSidebar";
 import AdminFooter from "../components/Admin/AdminFooter";

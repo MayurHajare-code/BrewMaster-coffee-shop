@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getOrderItems } from "../../services/orderService";
+// import { getOrderItems } from "../../services/orderService";
 import "../../styles/admin/ManageMenu.css";
 import api from "../../axios";
 

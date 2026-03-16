@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getMenuItems, deleteMenuItem } from "../../services/menuService";
+// import { getMenuItems, deleteMenuItem } from "../../services/menuService";
 import "../../styles/admin/ManageMenu.css";
 import toast from "react-hot-toast";
 import api from "../../axios";

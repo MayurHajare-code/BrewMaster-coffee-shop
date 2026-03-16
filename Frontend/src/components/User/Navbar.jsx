@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import "../../styles/user/Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../../firebase";
 import toast from "react-hot-toast";
 import { useCart } from "../../Context/CartContext";
 import { useAuth } from "../../Context/AuthContext";

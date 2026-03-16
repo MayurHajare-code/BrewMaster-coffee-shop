@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase";
+
 import "../../styles/user/MenuDetails.css";
 import { useCart } from "../../Context/CartContext";
 import MenuSlider from "../../components/User/MenuSlider";
@@ -19,17 +18,15 @@ const MenuDetails = () => {
 
   useEffect(() => {
     const fetchMenuDetails = async () => {
-      
-        try {
-          setLoading(true);
-          const res = await api.get(`/menus/${id}`);
-          setMenu(res.data);
-        } catch (err) {
-          console.error("Failed to fetch menu", err);
-        } finally {
-          setLoading(false);
-        
-      };
+      try {
+        setLoading(true);
+        const res = await api.get(`/menus/${id}`);
+        setMenu(res.data);
+      } catch (err) {
+        console.error("Failed to fetch menu", err);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchMenuDetails();
@@ -70,7 +67,7 @@ const MenuDetails = () => {
         <div className="menu-detail-card">
           {/* Image */}
           <div className="menu-detail-image">
-            <img src={`http://localhost:3000${menu.image}`} alt={menu.title} />
+            <img src={menu.image.url} alt={menu.title} />
           </div>
 
           {/* Info */}
@@ -105,7 +102,7 @@ const MenuDetails = () => {
           perfection for every coffee lover.
         </p>
 
-        {loading ? <p>Please wait...</p> : <MenuSlider addToCart={addToCart} />}
+        {/* {loading ? <p>Please wait...</p> : <MenuSlider addToCart={addToCart} />} */}
       </section>
     </>
   );

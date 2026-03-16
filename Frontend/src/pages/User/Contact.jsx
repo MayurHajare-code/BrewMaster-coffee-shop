@@ -27,13 +27,13 @@ const Contact = () => {
 
             <ul>
               <li>
-                <i class="fa-solid fa-location-dot"></i> Mumbai, India
+                <i className="fa-solid fa-location-dot"></i> Mumbai, India
               </li>
               <li>
-                <i class="fa-solid fa-at"></i> mayurhajare333@gmail.com
+                <i className="fa-solid fa-at"></i> mayurhajare333@gmail.com
               </li>
               <li>
-                <i class="fa-solid fa-phone"></i> +91 8879334267
+                <i className="fa-solid fa-phone"></i> +91 8879334267
               </li>
             </ul>
           </div>

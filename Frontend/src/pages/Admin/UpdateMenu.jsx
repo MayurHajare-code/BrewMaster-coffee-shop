@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { getMenuById, updateMenuItem } from "../../services/menuService";
-import { getCategories } from "../../services/categoryService";
+// import { getMenuById, updateMenuItem } from "../../services/menuService";
+// import { getCategories } from "../../services/categoryService";
 import toast from "react-hot-toast";
 import "../../styles/admin/AddMenu.css";
 import api from "../../axios";

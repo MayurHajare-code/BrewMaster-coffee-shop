@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { auth, db } from "../../firebase";
+
 import { useNavigate } from "react-router-dom";
 import "../../styles/user/Checkout.css";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+
 import toast from "react-hot-toast";
 import { useCart } from "../../Context/CartContext";
 import api from "../../axios";

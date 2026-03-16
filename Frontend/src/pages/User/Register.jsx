@@ -1,14 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  createUserWithEmailAndPassword,
-  updateProfile,
-  signOut,
-} from "firebase/auth";
-import { auth, db } from "../../firebase";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
-
 import toast from "react-hot-toast";
 import api from "../../axios";
 
@@ -61,7 +53,6 @@ const Register = () => {
     } finally {
       setLoading(false);
     }
-
   };
 
   return (
